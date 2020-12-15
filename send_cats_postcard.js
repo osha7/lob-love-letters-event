@@ -1,10 +1,16 @@
+// this tells lob which environment to use test or live
+// this is coming from .env file
 const LOB_API_KEY = process.env.LOB_API_KEY;
+// https://docs.lob.com and look at the node section
+// this is how you include lob and send thing to Lob
 const Lob = require('lob')(LOB_API_KEY);
 
 const fs = require('fs');
 
 console.log(`INSIDE PREP POSTCARD`);
 
+// merge variables
+// these variable help personalize
 const FRIENDS_ADDRESS = {
     name: 'Lara Lobster',
     address_line1: '210 King St',
@@ -35,7 +41,7 @@ Lob.postcards.create({
     front: fs.createReadStream('./assets/CatsPostcardFront.html'),
     back: fs.createReadStream('./assets/CatsPostcardBack.html'),
     merge_variables: {
-        recipient,
+        recipient, // recipient: recipient
         message,
         closing,
         sender
